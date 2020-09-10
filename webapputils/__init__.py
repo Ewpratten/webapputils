@@ -2,15 +2,15 @@ import requests
 import hashlib
 import flask
 
-class Webapp(object):
+class Webapp(flask.Flask):
 
     _app: flask.Flask
     flask: flask.Flask
     _google_tracking_code: str
 
     def __init__(self, name, static_directory:str="static", sort_dicts:bool=False, google_tracking_code:str=""):
-        self._app = flask.Flask(name, static_folder=static_directory)
-        self.flask = self._app
+        super().__init__(name, static_folder=static_directory)
+        self.flask = self
         self._google_tracking_code = google_tracking_code
 
     def _handle_404(self, e):
